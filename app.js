@@ -16,6 +16,7 @@ const reviewRouter = require('./routes/reviewRoutes')
 const bookingRouter = require('./routes/bookingRoutes')
 const viewRouter = require('./routes/viewRoutes')
 
+// Start express app
 const app = express()
 
 // Express automatically support all the most common template engine, such as Pug
