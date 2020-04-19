@@ -8,6 +8,7 @@ const xss = require('xss-clean')
 const hpp = require('hpp')
 const cookieParser = require('cookie-parser')
 const compression = require('compression')
+const cors = require('cors')
 
 const AppError = require('./utils/appError')
 const globalErrorHandler = require('./controllers/errorController')
@@ -27,6 +28,10 @@ app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, 'views'))
 
 // 1) GLOBAL MIDDLEWARES
+// Implement CORS for to grant GET/POST request access for any origin
+app.use(cors())
+// Implement CORS for complicated request access for any origin
+app.options('*', cors())
 
 // Serve static file
 // express.static will set up the default route of the app, where it will try searching in ${__dirname}/public if it couldn't find the requested path
