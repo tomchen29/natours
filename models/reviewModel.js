@@ -85,7 +85,7 @@ reviewSchema.post('save', function() {
 // define a post middleware that matches updateReview and deleteReview, in another word findByIdAndUpdate and findByIdAndDelete
 // 'findByIdAndUpdate' and 'findByIdAndDelete' are essintially 'findOneAndUpdate' and 'findOneAndDelete'
 reviewSchema.post(/^findOneAnd/, async function(doc, next) {
-  console.log(doc)
+  // console.log(doc)
   await doc.constructor.calcAverageRatings(doc.tour)
   next()
 })

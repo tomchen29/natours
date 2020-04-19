@@ -110,10 +110,10 @@ userSchema.methods.createPasswordResetToken = function() {
     .update(resetToken) // input the temp password generated from the server side
     .digest('hex')
 
-  console.log(`The original reset password token is: ${resetToken}`)
-  console.log(
-    `The encrypted reset password token is: ${this.passwordResetToken}`
-  )
+  // console.log(`The original reset password token is: ${resetToken}`)
+  // console.log(
+  //   `The encrypted reset password token is: ${this.passwordResetToken}`
+  // )
 
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000 // expires in 10 mins
   return resetToken
