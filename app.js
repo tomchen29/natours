@@ -19,6 +19,7 @@ const viewRouter = require('./routes/viewRoutes')
 
 // Start express app
 const app = express()
+app.enable('trust proxy') // enable Heroku redirected proxy
 
 // Express automatically support all the most common template engine, such as Pug
 app.set('view engine', 'pug')

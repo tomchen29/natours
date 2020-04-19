@@ -32,7 +32,8 @@ mongoose
   })
   .then(() => console.log('DB connection successful!'))
 
-// start the application
+// start the application with a pre-defined port
+// Heroku will assign a PORT value to process.env
 const port = process.env.PORT || 3000
 const server = app.listen(port, () => {
   console.log(`App running on port ${port}...`)
@@ -46,4 +47,13 @@ process.on('unhandledRejection', err => {
   server.close(() => {
     process.exit(1)
   })
+})
+
+// deal with an SIGTERM event, such as Heruku shutdown
+process.on('SIGTERM', () => {
+  console.log('👋 SIGTERM RECEIVED. Shutting down gracefully...')
+  server.close(() => {
+    console.log('💥 Process terminated!')
+  })
+  // the SIGTERM will automatically shut down the service, so we don't need process.exit(1)
 })
