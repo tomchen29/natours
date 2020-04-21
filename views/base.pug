@@ -12,7 +12,7 @@ html
             //- #{title} allows us to call the local js variable, and mix JS with HTML
             title Natours | #{title}
 
-    body
+    body(data-alert=`${alert ? alert: ''}`)
         // HEADER
         include _header
         

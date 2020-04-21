@@ -5,12 +5,11 @@ const bookingController = require('../controllers/bookingController')
 
 const router = express.Router()
 
-router.route('/').get(
-  // the line below has been deprecated
-  // bookingController.createBookingCheckout,
-  authController.isLoggedIn,
-  viewsController.getoverview
-)
+// apply the alert middleware to all the web routes
+router.use(viewsController.alerts)
+
+// main page
+router.route('/').get(authController.isLoggedIn, viewsController.getoverview)
 router.get('/tour/:slug', authController.isLoggedIn, viewsController.getTour)
 router.get('/login', authController.isLoggedIn, viewsController.getLoginForm)
 router.get('/signup', viewsController.getSignupForm)
