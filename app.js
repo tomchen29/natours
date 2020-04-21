@@ -7,6 +7,7 @@ const mongoSanitize = require('express-mongo-sanitize')
 const xss = require('xss-clean')
 const hpp = require('hpp')
 const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
 const compression = require('compression')
 const cors = require('cors')
 
@@ -59,7 +60,7 @@ app.use('/api', limiter)
 // however if we hit line 67, the body parser will convert all the input into JSON
 app.post(
   '/webhook-checkout',
-  express.raw({ type: 'application/json' }),
+  bodyParser.raw({ type: 'application/json' }),
   bookingController.webhookCheckout
 )
 
