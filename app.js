@@ -16,6 +16,8 @@ const tourRouter = require('./routes/tourRoutes')
 const userRouter = require('./routes/userRoutes')
 const reviewRouter = require('./routes/reviewRoutes')
 const bookingRouter = require('./routes/bookingRoutes')
+const bookingController = require('./controllers/bookingController')
+
 const viewRouter = require('./routes/viewRoutes')
 
 // Start express app
@@ -52,6 +54,14 @@ const limiter = rateLimit({
   message: 'Too many requests from this IP, please try again in an hour!'
 })
 app.use('/api', limiter)
+
+// reason why we don't define the post method in router is because: in webhookCheckout handler function, when we receive the body from Stripe, the Strip function that's going to read the body requires the body in raw form (in a string instead of json)
+// however if we hit line 67, the body parser will convert all the input into JSON
+app.post(
+  '/webhook-checkout',
+  express.raw({ type: 'application/json' }),
+  bookingController.webhookCheckout
+)
 
 // Parse req.body and browser cookie
 app.use(express.json({ limit: '10kb' })) // only accept the request within 10kb size

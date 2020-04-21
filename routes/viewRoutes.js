@@ -5,13 +5,12 @@ const bookingController = require('../controllers/bookingController')
 
 const router = express.Router()
 
-router
-  .route('/')
-  .get(
-    bookingController.createBookingCheckout,
-    authController.isLoggedIn,
-    viewsController.getoverview
-  )
+router.route('/').get(
+  // the line below has been deprecated
+  // bookingController.createBookingCheckout,
+  authController.isLoggedIn,
+  viewsController.getoverview
+)
 router.get('/tour/:slug', authController.isLoggedIn, viewsController.getTour)
 router.get('/login', authController.isLoggedIn, viewsController.getLoginForm)
 router.get('/signup', viewsController.getSignupForm)
